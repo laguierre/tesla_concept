@@ -1,50 +1,202 @@
 import 'package:badges/badges.dart';
 import 'package:car/constants.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:percent_indicator/circular_percent_indicator.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    var size = MediaQuery.of(context).size;
     return Container(
+      alignment: Alignment.topCenter,
+      height: size.height,
+      width: double.infinity,
       decoration: const BoxDecoration(gradient: kBackGroundGradient),
-      child: Column(
-        children: [
-          Padding(
-            padding: const EdgeInsets.only(right: 20, top: 15),
-            child: Row(
-              children: [
-                IconButton(
-                    onPressed: () {},
-                    icon: Icon(
-                      Icons.more_vert_rounded,
-                      color: kPrimaryColor,
-                      size: 40,
-                    )),
-                const Spacer(),
-                Badge(
-                  badgeColor: kPrimaryColor,
-                  badgeContent: const Text('1'),
-                  child: Container(
-                    alignment: Alignment.ce
-                    margin: const EdgeInsets.only(left: 8, bottom: 6),
-                    height: 50,
-                    width: 50,
-                    decoration: const BoxDecoration(
-                        color: Colors.white10, shape: BoxShape.circle),
-                    child: IconButton(
-                        onPressed: () {},
-                        icon: const Icon(
-                          Icons.person_rounded,
-                          color: kBottomAppBarColor,
-                          size: 40,
-                        )),
-                  ),
+      child: SingleChildScrollView(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          //alignment: Alignment.topCenter,
+          children: [
+            const TopBar(),
+            Column(
+              children: const [
+                Text(
+                  'Your Tesla',
+                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
                 ),
+                SizedBox(height: 7),
+                Text('MODEL X',
+                    style: TextStyle(fontSize: 26, color: Colors.grey)),
               ],
             ),
-          )
+            const SizedBox(height: 25),
+            SizedBox(
+              height: size.height * 0.48,
+              child: Stack(
+                alignment: Alignment.topCenter,
+                children: [
+                  Image.asset(
+                    'lib/assets/images/homepage_tesla.png',
+                    height: size.height * 0.32,
+                    fit: BoxFit.contain,
+                  ),
+                  Positioned(
+                    top: size.height * 0.28,
+                    child: CircularPercentIndicator(
+                      curve: Curves.decelerate,
+                      animation: true,
+                      radius: size.width * 0.2,
+                      animationDuration: 1200,
+                      percent: 0.9,
+                      lineWidth: 15,
+                      progressColor: kPrimaryColor,
+                      backgroundColor: kProgressBackGroundColor,
+                      circularStrokeCap: CircularStrokeCap.round,
+                      center: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: const [
+                          Text('95%',
+                              style: TextStyle(
+                                fontSize: 40,
+                              )),
+                          Text('Charged')
+                        ],
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                SvgPicture.asset('lib/assets/images/lighting.svg'),
+                const Text(
+                  'Charging... 14 mins remaining',
+                  style: TextStyle(color: Colors.grey),
+                )
+              ],
+            ),
+            SizedBox(height: 10),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: const [
+                InfoCard(
+                  title: 'Temperature',
+                  label: 'Cabin',
+                  value: '21°C',
+                ),
+                SizedBox(width: 30),
+                InfoCard(
+                  title: 'Consumption',
+                  label: 'Today',
+                  value: '4.3',
+                )
+              ],
+            ),
+            SizedBox(height: 20),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+class TopBar extends StatelessWidget {
+  const TopBar({
+    Key? key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.only(left: 10, right: 30, top: 15),
+      child: Row(
+        children: [
+          IconButton(
+              onPressed: () {},
+              icon: const Icon(
+                FontAwesomeIcons.bars,
+                color: kPrimaryColor,
+                size: 40,
+              )),
+          const Spacer(),
+          Container(
+            alignment: Alignment.center,
+            height: 45,
+            width: 45,
+            decoration: const BoxDecoration(
+                color: Colors.white10, shape: BoxShape.circle),
+            child: Badge(
+              badgeColor: kPrimaryColor,
+              badgeContent: const Text('1'),
+              child: IconButton(
+                  onPressed: () {},
+                  icon: const Icon(
+                    FontAwesomeIcons.solidUser,
+                    color: kBottomAppBarColor,
+                    size: 25,
+                  )),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class InfoCard extends StatelessWidget {
+  const InfoCard({
+    Key? key,
+    required this.title,
+    required this.label,
+    required this.value,
+  }) : super(key: key);
+  final String title, label, value;
+
+  @override
+  Widget build(BuildContext context) {
+    var size = MediaQuery.of(context).size;
+    return Container(
+      padding: const EdgeInsets.only(top: 15, bottom: 5, left: 15, right: 15),
+      height: size.height * 0.16,
+      width: size.height * 0.18,
+      decoration: BoxDecoration(
+        boxShadow: [
+          BoxShadow(
+            color: Colors.grey.withOpacity(0.5),
+            spreadRadius: 3,
+            blurRadius: 7,
+            offset: Offset(0, 3), // changes position of shadow
+          ),
+        ],
+          borderRadius: BorderRadius.circular(20), color: kBottomAppBarColor),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            title,
+            style: const TextStyle(fontSize: 15),
+          ),
+          const SizedBox(height: 7),
+          Text(
+            label,
+            style: const TextStyle(fontSize: 13, color: Colors.grey),
+          ),
+          const SizedBox(height: 10),
+          Center(
+            child: Text(
+              value,
+              style:
+                  const TextStyle(letterSpacing: 1, color: kPrimaryColor, fontSize: 50),
+            ),
+          ),
+
         ],
       ),
     );
