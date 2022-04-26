@@ -28,5 +28,17 @@ const LinearGradient kCardGradient = LinearGradient(
       Color.fromARGB(255, 40, 40, 45),
     ]);
 
+const LinearGradient kStatsGradient = LinearGradient(
+    begin: Alignment.topCenter,
+    end: Alignment.bottomCenter,
+    colors: [
+      kSecondaryColor,
+      kPrimaryColor,
+    ]);
+
 const bottomSizeIcon = 35.0;
 const batteryCharge = 85.0;
+const motorPercent = 65.0;
+const tempBatteryPercent = 35.0;
+const brakePercent = 78.0;
+const suspensionPercent = 53.0;

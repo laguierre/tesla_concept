@@ -171,7 +171,7 @@ class InfoCard extends StatelessWidget {
             color: kPrimaryColor.withOpacity(0.3),
             spreadRadius: 3,
             blurRadius: 7,
-            offset: Offset(0, 3), // changes position of shadow
+            offset: const Offset(0, 3), // changes position of shadow
           ),
         ],
           borderRadius: BorderRadius.circular(20), color: kBottomAppBarColor),
