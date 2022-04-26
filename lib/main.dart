@@ -4,6 +4,8 @@ import 'package:provider/provider.dart';
 import 'constants.dart';
 import 'models/models.dart';
 import 'pages/home_page/home_page.dart';
+import 'pages/settings_page/settings_page.dart';
+import 'pages/stats_page/stat_page.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
@@ -59,13 +61,9 @@ class _MainFrameState extends State<MainFrame> {
         body: PageView(
           controller: _pageController,
           children: [
-            HomePage(),
-            Container(
-              color: Colors.yellow,
-            ),
-            Container(
-              color: Colors.green,
-            ),
+            const HomePage(),
+            const StatsPage(),
+            const SettingsPage(),
             Container(
               color: Colors.blue,
             ),

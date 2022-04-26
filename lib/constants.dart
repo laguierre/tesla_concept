@@ -29,3 +29,4 @@ const LinearGradient kCardGradient = LinearGradient(
     ]);
 
 const bottomSizeIcon = 35.0;
+const batteryCharge = 85.0;

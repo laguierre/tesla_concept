@@ -18,11 +18,10 @@ class HomePage extends StatelessWidget {
       decoration: const BoxDecoration(gradient: kBackGroundGradient),
       child: SingleChildScrollView(
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,
           //alignment: Alignment.topCenter,
           children: [
-            const TopBar(),
+            const TopBarHome(),
             Column(
               children: const [
                 Text(
@@ -52,19 +51,19 @@ class HomePage extends StatelessWidget {
                       animation: true,
                       radius: size.width * 0.2,
                       animationDuration: 1200,
-                      percent: 0.9,
+                      percent: batteryCharge/100,
                       lineWidth: 15,
                       progressColor: kPrimaryColor,
                       backgroundColor: kProgressBackGroundColor,
                       circularStrokeCap: CircularStrokeCap.round,
                       center: Column(
                         mainAxisAlignment: MainAxisAlignment.center,
-                        children: const [
-                          Text('95%',
-                              style: TextStyle(
+                        children: [
+                          Text(batteryCharge.toString() + '%',
+                              style: const TextStyle(
                                 fontSize: 40,
                               )),
-                          Text('Charged')
+                          const Text('Charged')
                         ],
                       ),
                     ),
@@ -82,7 +81,7 @@ class HomePage extends StatelessWidget {
                 )
               ],
             ),
-            SizedBox(height: 10),
+            const SizedBox(height: 10),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: const [
@@ -99,7 +98,7 @@ class HomePage extends StatelessWidget {
                 )
               ],
             ),
-            SizedBox(height: 20),
+            const SizedBox(height: 20),
           ],
         ),
       ),
@@ -107,8 +106,8 @@ class HomePage extends StatelessWidget {
   }
 }
 
-class TopBar extends StatelessWidget {
-  const TopBar({
+class TopBarHome extends StatelessWidget {
+  const TopBarHome({
     Key? key,
   }) : super(key: key);
 
@@ -169,7 +168,7 @@ class InfoCard extends StatelessWidget {
       decoration: BoxDecoration(
         boxShadow: [
           BoxShadow(
-            color: Colors.grey.withOpacity(0.5),
+            color: kPrimaryColor.withOpacity(0.3),
             spreadRadius: 3,
             blurRadius: 7,
             offset: Offset(0, 3), // changes position of shadow
