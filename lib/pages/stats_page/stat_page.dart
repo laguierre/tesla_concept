@@ -1,4 +1,5 @@
 import 'package:car/constants.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 import 'chart_widget.dart';
@@ -42,11 +43,45 @@ class StatsPage extends StatelessWidget {
                     Column(mainAxisAlignment: MainAxisAlignment.start,children: [
 
                       Container(
+                        padding: EdgeInsets.symmetric(horizontal: 10, vertical: 10),
                         height: sizeHeightContainers * 0.60,
                         width: size.width - (size.width * 0.32 + 20 + 2 * paddingContainers),
                         decoration: BoxDecoration(
                             color: kBottomAppBarColor,
                             borderRadius: BorderRadius.circular(kCircularBorder)),
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.spaceAround,
+                          children: [
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.start,
+                              children: [
+                                Icon(Icons.lock_rounded, color: kPrimaryColor),
+                                SizedBox(width: 5),
+                                Text('Doors Locked', style: TextStyle(color: Colors.grey)),
+                                Spacer(),
+                                CupertinoSwitch(value: true, activeColor: kPrimaryColor, onChanged: (sw){}),
+                              ]),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            children: [
+                              Icon(Icons.lock_rounded, color: kPrimaryColor),
+                              SizedBox(width: 5),
+                              Text('Doors Locked', style: TextStyle(color: Colors.grey)),
+                              Spacer(),
+                              CupertinoSwitch(value: true, activeColor: kPrimaryColor, onChanged: (sw){}),
+                            ]),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.start,
+                              children: [
+                                Icon(Icons.lock_rounded, color: kPrimaryColor),
+                                SizedBox(width: 5),
+                                Text('Doors Locked', style: TextStyle(color: Colors.grey)),
+                                Spacer(),
+                                CupertinoSwitch(value: true, activeColor: kPrimaryColor, onChanged: (sw){}),
+                              ],
+                            )
+                          ],
+                        ),
                       ),
                       const SizedBox(height: 20),
                       Container(
