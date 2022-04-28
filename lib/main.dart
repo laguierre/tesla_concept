@@ -103,9 +103,15 @@ class _MainFrameState extends State<MainFrame> {
                       Positioned(
                         bottom: 20,
                         child: Container(
-                          decoration: const BoxDecoration(
+                          decoration: BoxDecoration(
                             shape: BoxShape.circle,
                             gradient: buttonGradient,
+                            boxShadow: [BoxShadow(
+                              color: kPrimaryColor.withOpacity(0.3),
+                              spreadRadius: 5,
+                              blurRadius: 7,
+                              offset: const Offset(0, 3), // changes position of shadow
+                            ),]
                           ),
                           child: IconButton(
                             iconSize: 50,

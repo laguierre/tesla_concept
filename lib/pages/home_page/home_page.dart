@@ -51,7 +51,7 @@ class HomePage extends StatelessWidget {
                       animation: true,
                       radius: size.width * 0.2,
                       animationDuration: 1200,
-                      percent: batteryCharge/100,
+                      percent: batteryCharge / 100,
                       lineWidth: 15,
                       progressColor: kPrimaryColor,
                       backgroundColor: kProgressBackGroundColor,
@@ -165,16 +165,14 @@ class InfoCard extends StatelessWidget {
       padding: const EdgeInsets.only(top: 15, bottom: 5, left: 15, right: 15),
       height: size.height * 0.16,
       width: size.height * 0.18,
-      decoration: BoxDecoration(
-        boxShadow: [
-          BoxShadow(
-            color: kPrimaryColor.withOpacity(0.3),
-            spreadRadius: 3,
-            blurRadius: 7,
-            offset: const Offset(0, 3), // changes position of shadow
-          ),
-        ],
-          borderRadius: BorderRadius.circular(20), color: kBottomAppBarColor),
+      decoration: BoxDecoration(boxShadow: [
+        BoxShadow(
+          color: kPrimaryColor.withOpacity(0.3),
+          spreadRadius: 3,
+          blurRadius: 7,
+          offset: const Offset(0, 3), // changes position of shadow
+        ),
+      ], borderRadius: BorderRadius.circular(20), color: kBottomAppBarColor),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -191,11 +189,10 @@ class InfoCard extends StatelessWidget {
           Center(
             child: Text(
               value,
-              style:
-                  const TextStyle(letterSpacing: 1, color: kPrimaryColor, fontSize: 50),
+              style: const TextStyle(
+                  letterSpacing: 1, color: kPrimaryColor, fontSize: 50),
             ),
           ),
-
         ],
       ),
     );

@@ -39,6 +39,7 @@ dependencies:
   provider:
   badges: ^2.0.2
   font_awesome_flutter: ^10.1.0
+  fl_chart: ^0.50.1
 
 dev_dependencies:
   flutter_test:

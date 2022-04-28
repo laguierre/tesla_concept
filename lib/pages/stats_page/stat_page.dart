@@ -1,6 +1,8 @@
 import 'package:car/constants.dart';
 import 'package:flutter/material.dart';
 
+import 'chart_widget.dart';
+
 class StatsPage extends StatelessWidget {
   const StatsPage({Key? key}) : super(key: key);
 
@@ -13,14 +15,44 @@ class StatsPage extends StatelessWidget {
       width: double.infinity,
       decoration: const BoxDecoration(gradient: kBackGroundGradient),
       child: SingleChildScrollView(
-        child: Column(
-          children: [
-            const TopBarStat(),
-            const SizedBox(height: 30),
-            Image.asset('lib/assets/images/stats.png'),
-          ],
-        )
-      ),
+          child: Column(
+        children: [
+          const TopBarStat(),
+          const SizedBox(height: 30),
+          Image.asset('lib/assets/images/stats.png'),
+          Padding(
+            padding: const EdgeInsets.only(left: 20, right: 20, top: 15),
+            child: Column(
+              children: [
+                LineChartChargeHistory(),
+                const SizedBox(height: 20),
+                Row(
+                  children: [
+                    Container(
+                      height: size.height * 0.3,
+                      width: size.width * 0.32,
+                      decoration: BoxDecoration(
+                          color: kBottomAppBarColor,
+                          borderRadius: BorderRadius.circular(12)),
+                    ),
+                    const SizedBox(height: 20),
+                    Column(children: [
+                      Container(
+                        height: size.height * 0.3,
+                        width: size.width * 0.32,
+                        decoration: BoxDecoration(
+                            color: kBottomAppBarColor,
+                            borderRadius: BorderRadius.circular(12)),
+                      ),
+                    ],)
+                  ],
+                ),
+                SizedBox(height: 50),
+              ],
+            ),
+          ),
+        ],
+      )),
     );
   }
 }
