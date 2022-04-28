@@ -42,3 +42,4 @@ const motorPercent = 65.0;
 const tempBatteryPercent = 35.0;
 const brakePercent = 78.0;
 const suspensionPercent = 53.0;
+const kCircularBorder = 12.0;

@@ -9,6 +9,8 @@ class StatsPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
+    double sizeHeightContainers = size.height * 0.32;
+    const double paddingContainers = 20.0;
     return Container(
       alignment: Alignment.topCenter,
       height: size.height,
@@ -21,28 +23,38 @@ class StatsPage extends StatelessWidget {
           const SizedBox(height: 30),
           Image.asset('lib/assets/images/stats.png'),
           Padding(
-            padding: const EdgeInsets.only(left: 20, right: 20, top: 15),
+            padding: const EdgeInsets.only(left: paddingContainers, right: paddingContainers, top: 15),
             child: Column(
               children: [
                 LineChartChargeHistory(),
                 const SizedBox(height: 20),
                 Row(
+                  mainAxisAlignment: MainAxisAlignment.start,
                   children: [
                     Container(
-                      height: size.height * 0.3,
+                      height: sizeHeightContainers,
                       width: size.width * 0.32,
                       decoration: BoxDecoration(
                           color: kBottomAppBarColor,
                           borderRadius: BorderRadius.circular(12)),
                     ),
-                    const SizedBox(height: 20),
-                    Column(children: [
+                    const SizedBox(width: 20),
+                    Column(mainAxisAlignment: MainAxisAlignment.start,children: [
+
                       Container(
-                        height: size.height * 0.3,
-                        width: size.width * 0.32,
+                        height: sizeHeightContainers * 0.60,
+                        width: size.width - (size.width * 0.32 + 20 + 2 * paddingContainers),
                         decoration: BoxDecoration(
                             color: kBottomAppBarColor,
-                            borderRadius: BorderRadius.circular(12)),
+                            borderRadius: BorderRadius.circular(kCircularBorder)),
+                      ),
+                      const SizedBox(height: 20),
+                      Container(
+                        height: sizeHeightContainers - (sizeHeightContainers * 0.60 + 20),
+                        width: size.width - (size.width * 0.32 + 20 + 2 * paddingContainers),
+                        decoration: BoxDecoration(
+                            color: kBottomAppBarColor,
+                            borderRadius: BorderRadius.circular(kCircularBorder)),
                       ),
                     ],)
                   ],
