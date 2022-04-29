@@ -23,6 +23,7 @@ class MyApp extends StatelessWidget {
     return MultiProvider(
       providers: [
         ChangeNotifierProvider(create: (_) => BottomButtonModel()),
+        ChangeNotifierProvider(create: (_) => StatsModel()),
       ],
       child: MaterialApp(
         title: 'Flutter Tesla Car App',
@@ -56,7 +57,6 @@ class _MainFrameState extends State<MainFrame> {
     int iBottom = Provider.of<BottomButtonModel>(context).number;
     return SafeArea(
       child: Scaffold(
-        backgroundColor: Colors.white,
         bottomNavigationBar: buildBottomAppBar(iBottom, context),
         body: PageView(
           controller: _pageController,
@@ -65,6 +65,7 @@ class _MainFrameState extends State<MainFrame> {
             const StatsPage(),
             const SettingsPage(),
             Container(
+              child: const Center(child: Text('User Page'),),
               color: Colors.blue,
             ),
           ],

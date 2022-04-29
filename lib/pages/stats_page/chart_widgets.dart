@@ -1,7 +1,9 @@
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 import '../../constants.dart';
+import '../../models/models.dart';
 
 class LineChartChargeHistory extends StatefulWidget {
   const LineChartChargeHistory({Key? key}) : super(key: key);
@@ -17,10 +19,10 @@ class _LineChartChargeHistoryState extends State<LineChartChargeHistory> {
     kSecondaryColor,
   ];
 
-  bool showAvg = false;
 
   @override
   Widget build(BuildContext context) {
+    bool showAvg = Provider.of<StatsModel>(context, listen: true).start;
     return Stack(
       children: <Widget>[
         AspectRatio(
@@ -38,7 +40,7 @@ class _LineChartChargeHistoryState extends State<LineChartChargeHistory> {
               gradient: kCardGradient,
             ),
             child: LineChart(
-              showAvg ? avgData() : mainData(),
+              !showAvg ? avgData() : mainData(),
             ),
           ),
         ),
@@ -337,6 +339,38 @@ class _LineChartChargeHistoryState extends State<LineChartChargeHistory> {
           ),
         ),
       ],
+    );
+  }
+}
+
+class TopBarStat extends StatelessWidget {
+  const TopBarStat({
+    Key? key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.only(left: 10, right: 30, top: 15),
+      child: Row(
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          IconButton(
+              onPressed: () {},
+              icon: const Icon(
+                Icons.arrow_back_ios,
+                color: Colors.white,
+                size: 40,
+              )),
+          const Text('Stats',
+              style: TextStyle(
+                  letterSpacing: 1, fontSize: 20, color: Colors.grey)),
+          const Spacer(),
+          const Text('MODEL X',
+              style: TextStyle(
+                  letterSpacing: 1, fontSize: 20, color: Colors.white)),
+        ],
+      ),
     );
   }
 }

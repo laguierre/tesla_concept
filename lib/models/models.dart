@@ -9,3 +9,12 @@ class BottomButtonModel extends ChangeNotifier{
     notifyListeners();
   }
 }
+
+class StatsModel extends ChangeNotifier{
+  bool _start = false;
+  bool get start => _start;
+  set start(bool value){
+    _start = value;
+    notifyListeners();
+  }
+}

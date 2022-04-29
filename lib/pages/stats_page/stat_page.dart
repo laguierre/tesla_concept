@@ -1,11 +1,13 @@
 import 'package:car/constants.dart';
+import 'package:car/models/models.dart';
 import 'package:car/widgets/widgets.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:percent_indicator/percent_indicator.dart';
+import 'package:provider/provider.dart';
 
-import 'chart_widget.dart';
+import 'chart_widgets.dart';
 
 class StatsPage extends StatefulWidget {
   const StatsPage({Key? key}) : super(key: key);
@@ -30,7 +32,6 @@ class _StatsPageState extends State<StatsPage> {
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
     double sizeHeightContainers = size.height * 0.32;
-    const double paddingContainers = 20.0;
     double controlContainerSize = size.width * 0.32;
     return Container(
       alignment: Alignment.topCenter,
@@ -60,7 +61,7 @@ class _StatsPageState extends State<StatsPage> {
                       decoration: BoxDecoration(
                           gradient: kCardGradient,
                           borderRadius: BorderRadius.circular(12)),
-                      child: ACCtrol(
+                      child: ACCtrl(
                         width: controlContainerSize,
                         height: sizeHeightContainers,
                       ),
@@ -69,108 +70,7 @@ class _StatsPageState extends State<StatsPage> {
                     Column(
                       mainAxisAlignment: MainAxisAlignment.start,
                       children: [
-                        Container(
-                          padding: const EdgeInsets.symmetric(
-                              horizontal: 10, vertical: 10),
-                          height: sizeHeightContainers * 0.60,
-                          width: size.width -
-                              (size.width * 0.32 + 20 + 2 * paddingContainers),
-                          decoration: BoxDecoration(
-                              //color: kBottomAppBarColor,
-                              gradient: kCardGradient,
-                              borderRadius:
-                                  BorderRadius.circular(kCircularBorder)),
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.spaceAround,
-                            children: [
-                              Row(
-                                  mainAxisAlignment: MainAxisAlignment.start,
-                                  children: [
-                                    const Icon(Icons.lock_rounded,
-                                        color: kPrimaryColor),
-                                    const SizedBox(width: 7),
-                                    const Text('Doors Locked',
-                                        style: TextStyle(color: Colors.grey)),
-                                    const Spacer(),
-                                    CupertinoSwitch(
-                                        trackColor: colorSW1Track,
-                                        thumbColor: colorSW1Thumb,
-                                        activeColor: colorSW1Active,
-                                        value: stateSW1,
-                                        onChanged: (value) {
-                                          stateSW1 = value;
-                                          if (!stateSW1) {
-                                            colorSW1Active = kPrimaryColor;
-                                            colorSW1Thumb = kPrimaryColor;
-                                            colorSW1Track = Colors.white;
-                                          } else {
-                                            colorSW1Active = kPrimaryColor;
-                                            colorSW1Thumb = Colors.white;
-                                            colorSW1Track = Colors.white;
-                                          }
-                                          setState(() {});
-                                        }),
-                                  ]),
-                              Row(
-                                  mainAxisAlignment: MainAxisAlignment.start,
-                                  children: [
-                                    const Icon(FontAwesomeIcons.dog,
-                                        color: kPrimaryColor),
-                                    const SizedBox(width: 7),
-                                    const Text('Dog Mode',
-                                        style: TextStyle(color: Colors.grey)),
-                                    const Spacer(),
-                                    CupertinoSwitch(
-                                        trackColor: colorSW2Track,
-                                        thumbColor: colorSW2Thumb,
-                                        activeColor: colorSW2Active,
-                                        value: stateSW2,
-                                        onChanged: (value) {
-                                          stateSW2 = value;
-                                          if (!stateSW2) {
-                                            colorSW2Active = kPrimaryColor;
-                                            colorSW2Thumb = kPrimaryColor;
-                                            colorSW2Track = Colors.white;
-                                          } else {
-                                            colorSW2Active = kPrimaryColor;
-                                            colorSW2Thumb = Colors.white;
-                                            colorSW2Track = Colors.white;
-                                          }
-                                          setState(() {});
-                                        }),
-                                  ]),
-                              Row(
-                                mainAxisAlignment: MainAxisAlignment.start,
-                                children: [
-                                  const Icon(Icons.security_rounded,
-                                      color: kPrimaryColor),
-                                  const SizedBox(width: 7),
-                                  const Text('Sentry Mode',
-                                      style: TextStyle(color: Colors.grey)),
-                                  const Spacer(),
-                                  CupertinoSwitch(
-                                      trackColor: colorSW3Track,
-                                      thumbColor: colorSW3Thumb,
-                                      activeColor: colorSW3Active,
-                                      value: stateSW3,
-                                      onChanged: (value) {
-                                        stateSW3 = value;
-                                        if (!stateSW3) {
-                                          colorSW3Active = kPrimaryColor;
-                                          colorSW3Thumb = kPrimaryColor;
-                                          colorSW3Track = Colors.white;
-                                        } else {
-                                          colorSW3Active = kPrimaryColor;
-                                          colorSW3Thumb = Colors.white;
-                                          colorSW3Track = Colors.white;
-                                        }
-                                        setState(() {});
-                                      }),
-                                ],
-                              )
-                            ],
-                          ),
-                        ),
+                        buildSwitch(sizeHeightContainers, size),
                         const SizedBox(height: 20),
                         Container(
                           height: sizeHeightContainers -
@@ -226,42 +126,114 @@ class _StatsPageState extends State<StatsPage> {
       )),
     );
   }
-}
 
-class TopBarStat extends StatelessWidget {
-  const TopBarStat({
-    Key? key,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.only(left: 10, right: 30, top: 15),
-      child: Row(
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-          IconButton(
-              onPressed: () {},
-              icon: const Icon(
-                Icons.arrow_back_ios,
-                color: Colors.white,
-                size: 40,
-              )),
-          const Text('Stats',
-              style: TextStyle(
-                  letterSpacing: 1, fontSize: 20, color: Colors.grey)),
-          const Spacer(),
-          const Text('MODEL X',
-              style: TextStyle(
-                  letterSpacing: 1, fontSize: 20, color: Colors.white)),
-        ],
-      ),
-    );
+  Container buildSwitch(double sizeHeightContainers, Size size) {
+    return Container(
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: 10, vertical: 10),
+                        height: sizeHeightContainers * 0.60,
+                        width: size.width -
+                            (size.width * 0.32 + 20 + 2 * paddingContainers),
+                        decoration: BoxDecoration(
+                            gradient: kCardGradient,
+                            borderRadius:
+                                BorderRadius.circular(kCircularBorder)),
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.spaceAround,
+                          children: [
+                            Row(
+                                mainAxisAlignment: MainAxisAlignment.start,
+                                children: [
+                                  const Icon(Icons.lock_rounded,
+                                      color: kPrimaryColor),
+                                  const SizedBox(width: 7),
+                                  const Text('Doors Locked',
+                                      style: TextStyle(color: Colors.grey)),
+                                  const Spacer(),
+                                  CupertinoSwitch(
+                                      trackColor: colorSW1Track,
+                                      thumbColor: colorSW1Thumb,
+                                      activeColor: colorSW1Active,
+                                      value: stateSW1,
+                                      onChanged: (value) {
+                                        stateSW1 = value;
+                                        if (!stateSW1) {
+                                          colorSW1Active = kPrimaryColor;
+                                          colorSW1Thumb = kPrimaryColor;
+                                          colorSW1Track = Colors.white;
+                                        } else {
+                                          colorSW1Active = kPrimaryColor;
+                                          colorSW1Thumb = Colors.white;
+                                          colorSW1Track = Colors.white;
+                                        }
+                                        setState(() {});
+                                      }),
+                                ]),
+                            Row(
+                                mainAxisAlignment: MainAxisAlignment.start,
+                                children: [
+                                  const Icon(FontAwesomeIcons.dog,
+                                      color: kPrimaryColor),
+                                  const SizedBox(width: 7),
+                                  const Text('Dog Mode',
+                                      style: TextStyle(color: Colors.grey)),
+                                  const Spacer(),
+                                  CupertinoSwitch(
+                                      trackColor: colorSW2Track,
+                                      thumbColor: colorSW2Thumb,
+                                      activeColor: colorSW2Active,
+                                      value: stateSW2,
+                                      onChanged: (value) {
+                                        stateSW2 = value;
+                                        if (!stateSW2) {
+                                          colorSW2Active = kPrimaryColor;
+                                          colorSW2Thumb = kPrimaryColor;
+                                          colorSW2Track = Colors.white;
+                                        } else {
+                                          colorSW2Active = kPrimaryColor;
+                                          colorSW2Thumb = Colors.white;
+                                          colorSW2Track = Colors.white;
+                                        }
+                                        setState(() {});
+                                      }),
+                                ]),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.start,
+                              children: [
+                                const Icon(Icons.security_rounded,
+                                    color: kPrimaryColor),
+                                const SizedBox(width: 7),
+                                const Text('Sentry Mode',
+                                    style: TextStyle(color: Colors.grey)),
+                                const Spacer(),
+                                CupertinoSwitch(
+                                    trackColor: colorSW3Track,
+                                    thumbColor: colorSW3Thumb,
+                                    activeColor: colorSW3Active,
+                                    value: stateSW3,
+                                    onChanged: (value) {
+                                      stateSW3 = value;
+                                      if (!stateSW3) {
+                                        colorSW3Active = kPrimaryColor;
+                                        colorSW3Thumb = kPrimaryColor;
+                                        colorSW3Track = Colors.white;
+                                      } else {
+                                        colorSW3Active = kPrimaryColor;
+                                        colorSW3Thumb = Colors.white;
+                                        colorSW3Track = Colors.white;
+                                      }
+                                      setState(() {});
+                                    }),
+                              ],
+                            )
+                          ],
+                        ),
+                      );
   }
 }
 
-class ACCtrol extends StatelessWidget {
-  const ACCtrol({
+class ACCtrl extends StatelessWidget {
+  const ACCtrl({
     Key? key,
     required this.width,
     required this.height,
@@ -280,7 +252,10 @@ class ACCtrol extends StatelessWidget {
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
-            SideWithCircle(height: heightContainer),
+            SideWithCircle(
+              height: heightContainer,
+              endPoint: 0.85,
+            ),
             VerticalPercentIndicator(
               showLabel: false,
               label: "",
@@ -288,10 +263,13 @@ class ACCtrol extends StatelessWidget {
               percent: 0.68,
               width: width * 0.4,
             ),
-            SideWithCircle(height: heightContainer),
+            SideWithCircle(
+              height: heightContainer,
+              endPoint: 0.68,
+            ),
           ],
         ),
-        SizedBox(height: 7),
+        const SizedBox(height: 7),
         Row(
           crossAxisAlignment: CrossAxisAlignment.center,
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -326,28 +304,33 @@ class ACCtrol extends StatelessWidget {
 }
 
 class SideWithCircle extends StatefulWidget {
-  const SideWithCircle({Key? key, required this.height}) : super(key: key);
+  const SideWithCircle({Key? key, required this.height, required this.endPoint})
+      : super(key: key);
   final double height;
+  final double endPoint;
 
   @override
   State<SideWithCircle> createState() => _SideWithCircleState();
 }
-
 class _SideWithCircleState extends State<SideWithCircle>
     with SingleTickerProviderStateMixin {
+  late AnimationController _controller;
+  late Animation<double> _animation;
 
   @override
   void initState() {
     super.initState();
     _controller = AnimationController(
-        vsync: this, duration: const Duration(milliseconds: 2000));
-    _animation = Tween<double>(begin: 0.4, end: 0.8).animate(_controller)
+        vsync: this, duration: const Duration(milliseconds: 2500));
+    _animation = Tween<double>(begin: 0.1, end: 1).animate(_controller)
       ..addListener(() {
+        if(_controller.value > 0.35) {      //35% of the animation
+          Provider.of<StatsModel>(context, listen: false).start = true;
+        }
         setState(() {});
       });
     _controller.forward();
     super.initState();
-    _controller = AnimationController(vsync: this);
   }
 
   @override
@@ -355,8 +338,6 @@ class _SideWithCircleState extends State<SideWithCircle>
     _controller.dispose();
     super.dispose();
   }
-  late AnimationController _controller;
-  late Animation<double> _animation;
 
   @override
   Widget build(BuildContext context) {
@@ -383,7 +364,7 @@ class _SideWithCircleState extends State<SideWithCircle>
           ],
         ),
         Positioned(
-          bottom: 10 * _animation.value,
+          bottom: widget.height * widget.endPoint * _animation.value,
           child: Container(
             height: 10,
             width: 10,

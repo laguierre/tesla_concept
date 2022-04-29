@@ -16,8 +16,8 @@ const LinearGradient kBackGroundGradient = LinearGradient(
     begin: Alignment.topCenter,
     end: Alignment.bottomCenter,
     colors: [
-      Color.fromARGB(255, 48, 48, 58),
-      Color.fromARGB(255, 28, 30, 35),
+      Color.fromARGB(255, 78, 78, 92),
+      Color.fromARGB(255, 43, 46, 56),
     ]);
 
 const LinearGradient kCardGradient = LinearGradient(
@@ -43,3 +43,5 @@ const tempBatteryPercent = 35.0;
 const brakePercent = 78.0;
 const suspensionPercent = 53.0;
 const kCircularBorder = 12.0;
+const double paddingContainers = 20.0;
+
