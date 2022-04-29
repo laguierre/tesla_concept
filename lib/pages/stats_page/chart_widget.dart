@@ -32,10 +32,11 @@ class _LineChartChargeHistoryState extends State<LineChartChargeHistory> {
               right: 20,
             ),
             decoration: const BoxDecoration(
-                borderRadius: BorderRadius.all(
-                  Radius.circular(10),
-                ),
-                color: kBottomAppBarColor),
+              borderRadius: BorderRadius.all(
+                Radius.circular(10),
+              ),
+              gradient: kCardGradient,
+            ),
             child: LineChart(
               showAvg ? avgData() : mainData(),
             ),
@@ -48,11 +49,14 @@ class _LineChartChargeHistoryState extends State<LineChartChargeHistory> {
               'Charging History',
               style: TextStyle(color: Colors.white),
             )),
-        const Positioned(right: 15,
-          top: 15, child: Text(
-          'Last 12 hours',
-          style: TextStyle(color: Colors.grey),
-        ),)
+        const Positioned(
+          right: 15,
+          top: 15,
+          child: Text(
+            'Last 12 hours',
+            style: TextStyle(color: Colors.grey),
+          ),
+        )
       ],
     );
   }
@@ -159,7 +163,10 @@ class _LineChartChargeHistoryState extends State<LineChartChargeHistory> {
       ),
       borderData: FlBorderData(
           show: false,
-          border: Border.all(color: const Color(0xff37434d), width: 1)),
+          border: Border.all(
+            color: const Color(0xff37434d),
+            width: 1,
+          )),
       minX: 0,
       maxX: 11,
       minY: 0,

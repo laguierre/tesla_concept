@@ -2,6 +2,8 @@ import 'package:car/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:percent_indicator/linear_percent_indicator.dart';
 
+import '../../widgets/widgets.dart';
+
 class SettingsPage extends StatelessWidget {
   const SettingsPage({Key? key}) : super(key: key);
 
@@ -94,7 +96,7 @@ class SettingsPage extends StatelessWidget {
                 animationDuration: 1200,
                 percent: batteryCharge / 100,
                 progressColor: kPrimaryColor,
-                backgroundColor: kProgressBackGroundColor,
+                backgroundColor: kBottomAppBarColor,
                 lineHeight: 25,
                 center: Text(batteryCharge.toString() + '%'),
                 barRadius: const Radius.circular(10),
@@ -109,21 +111,25 @@ class SettingsPage extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
               VerticalPercentIndicator(
+                showLabel: true,
                   label: 'Motor',
                   width: width,
                   height: height,
                   percent: motorPercent / 100),
               VerticalPercentIndicator(
+                  showLabel: true,
                   label: 'Battery Temp',
                   width: width,
                   height: height,
                   percent: tempBatteryPercent / 100),
               VerticalPercentIndicator(
+                  showLabel: true,
                   label: 'Brakers',
                   width: width,
                   height: height,
                   percent: brakePercent / 100),
               VerticalPercentIndicator(
+                  showLabel: true,
                   label: 'Suspensions',
                   width: width,
                   height: height,
@@ -152,7 +158,7 @@ class _ChargerCircles extends StatelessWidget {
       width: size.height * 0.12,
       child: Stack(
         alignment: Alignment.center,
-        children: [
+        children: const [
           CustomRipple(),
           SizedBox(
             height: 60,
@@ -209,8 +215,8 @@ class SettingsBarStat extends StatelessWidget {
                 },
                 elevation: 2.0,
                 fillColor: kPrimaryColor,
-                padding: EdgeInsets.all(12.0),
-                shape: CircleBorder(),
+                padding: const EdgeInsets.all(12.0),
+                shape: const CircleBorder(),
                 child: const Icon(
                   Icons.refresh_rounded,
                   size: 25.0, color: Colors.white,
@@ -224,71 +230,7 @@ class SettingsBarStat extends StatelessWidget {
   }
 }
 
-class VerticalPercentIndicator extends StatefulWidget {
-  VerticalPercentIndicator({
-    Key? key,
-    required this.height,
-    required this.width,
-    required this.percent,
-    required this.label,
-  }) : super(key: key);
 
-  final double height, width, percent;
-  String label;
-
-  @override
-  State<VerticalPercentIndicator> createState() => _VerticalPercentIndicatorState();
-}
-
-class _VerticalPercentIndicatorState extends State<VerticalPercentIndicator>with SingleTickerProviderStateMixin {
-  @override
-  void initState() {
-    _controller = AnimationController(
-        vsync: this, duration: const Duration(milliseconds: 2500));
-    _animation = Tween<double>(begin: 0.1, end: 1).animate(_controller)
-      ..addListener(() {
-        setState(() {});
-      });
-    _controller.forward();
-    super.initState();
-  }
-  @override
-  void dispose() {
-    _controller.dispose();
-    super.dispose();
-  }
-  late AnimationController _controller;
-  late Animation<double> _animation;
-  @override
-  Widget build(BuildContext context) {
-    return Column(
-      children: [
-        Container(
-          height: widget.height,
-          width: widget.width,
-          decoration: BoxDecoration(
-              color: kBottomAppBarColor,
-              borderRadius: BorderRadius.circular(15)),
-          child: Stack(
-            alignment: Alignment.bottomCenter,
-            children: [
-              Container(
-                  decoration: const BoxDecoration(
-                      gradient: kStatsGradient,
-                      borderRadius: BorderRadius.only(
-                        bottomLeft: Radius.circular(15),
-                        bottomRight: Radius.circular(15),
-                      )),
-                  height: widget.height * widget.percent * _animation.value),
-            ],
-          ),
-        ),
-        const SizedBox(height: 10),
-        Text(widget.label, style: const TextStyle(color: Colors.white)),
-      ],
-    );
-  }
-}
 
 class CustomRipple extends StatefulWidget {
   const CustomRipple({Key? key}) : super(key: key);
