@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
@@ -59,6 +61,10 @@ class _MainFrameState extends State<MainFrame> {
       child: Scaffold(
         bottomNavigationBar: buildBottomAppBar(iBottom, context),
         body: PageView(
+          physics: const BouncingScrollPhysics(),
+          onPageChanged: (index){
+            Provider.of<BottomButtonModel>(context,listen: false).number = index;
+          },
           controller: _pageController,
           children: [
             const HomePage(),

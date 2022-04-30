@@ -7,6 +7,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:percent_indicator/percent_indicator.dart';
 import 'package:provider/provider.dart';
 
+import '../../constants.dart';
 import 'chart_widgets.dart';
 
 class StatsPage extends StatefulWidget {

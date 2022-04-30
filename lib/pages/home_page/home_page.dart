@@ -1,16 +1,47 @@
+import 'dart:async';
+
 import 'package:badges/badges.dart';
 import 'package:car/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:percent_indicator/circular_percent_indicator.dart';
+import 'package:provider/provider.dart';
 
-class HomePage extends StatelessWidget {
+import '../../models/models.dart';
+
+class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
+
+  @override
+  State<HomePage> createState() => _HomePageState();
+}
+
+class _HomePageState extends State<HomePage> {
+  bool isRunning = true;
+
+  @override
+  void initState() {
+    TimerStart();
+    super.initState();
+  }
+
+  void TimerStart() {
+    Timer.periodic(const Duration(milliseconds: 500), (Timer timer) {
+      int index = Provider.of<BottomButtonModel>(context, listen: false).number;
+      if (index == 0) {
+        Provider.of<BottomButtonModel>(context, listen: false).charging =
+            !Provider.of<BottomButtonModel>(context, listen: false).charging;
+        setState(() {});
+      }
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
+    bool charging =
+        Provider.of<BottomButtonModel>(context, listen: false).charging;
     return Container(
       alignment: Alignment.topCenter,
       height: size.height,
@@ -39,10 +70,13 @@ class HomePage extends StatelessWidget {
               child: Stack(
                 alignment: Alignment.topCenter,
                 children: [
-                  Image.asset(
-                    'lib/assets/images/homepage_tesla.png',
-                    height: size.height * 0.32,
-                    fit: BoxFit.contain,
+                  Positioned(
+                    top: 0,
+                    child: Image.asset(
+                      'lib/assets/images/homepage_tesla.png',
+                      height: size.height * 0.32,
+                      fit: BoxFit.contain,
+                    ),
                   ),
                   Positioned(
                     top: size.height * 0.28,
@@ -74,7 +108,8 @@ class HomePage extends StatelessWidget {
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                SvgPicture.asset('lib/assets/images/lighting.svg'),
+                SvgPicture.asset('lib/assets/images/lighting.svg',
+                    color: charging ? kPrimaryColor : Colors.grey),
                 const Text(
                   'Charging... 14 mins remaining',
                   style: TextStyle(color: Colors.grey),
@@ -98,7 +133,7 @@ class HomePage extends StatelessWidget {
                 )
               ],
             ),
-            const SizedBox(height: 20),
+            const SizedBox(height: 50),
           ],
         ),
       ),

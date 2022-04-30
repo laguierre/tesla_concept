@@ -1,7 +1,7 @@
 # Tesla Concept Car Flutter App
 
-A Tesla Concept Demo Flutter application. Inspired in Venusha Dilshan's design [link](https://www.behance.net/gallery/120844613/Tesla-App-Design-Concept); graphics resourses in https://github.com/CodeFoxLk/flutter-ui-challenges.
-- PageView.
+A Tesla Concept Demo Flutter application. Inspired in Venusha Dilshan's design [link](https://www.behance.net/gallery/120844613/Tesla-App-Design-Concept); graphics resources in https://github.com/CodeFoxLk/flutter-ui-challenges.
+- PageView. YouTube video [link](https://youtube.com/shorts/Ab31Cg839DA?feature=share).
 - Provider for conserve the state of the button and flag for animation.
 - FL Chart for the graphics.
 - Tween Animations
@@ -25,11 +25,14 @@ A Tesla Concept Demo Flutter application. Inspired in Venusha Dilshan's design [
 
 ## GIF
 <p align="center">
-<img src="screenshots/sport.gif" height="700">
+<img src="screenshots/untitled.gif" height="700">
 </p>
 
 ## Screenshots
 <p align="center">
-<img src="screenshots\Screenshot_1646866349.png" height="700">
-<img src="screenshots\Screenshot_1646866400.png" height="700">
+<img src="screenshots\Screenshot_1651271180.png" height="700">
+<img src="screenshots\Screenshot_1651271187.png" height="700">
+<img src="screenshots\Screenshot_1651271189.png" height="700">
+<img src="screenshots\Screenshot_1651271192.png" height="700">
+<img src="screenshots\Screenshot_1651271195.png" height="700">
 </p>
