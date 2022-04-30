@@ -1,5 +1,3 @@
-import 'dart:async';
-
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
@@ -53,18 +51,20 @@ class MainFrame extends StatefulWidget {
 }
 PageController _pageController = PageController(initialPage: 0);
 
+
 class _MainFrameState extends State<MainFrame> {
   @override
   Widget build(BuildContext context) {
     int iBottom = Provider.of<BottomButtonModel>(context).number;
     return SafeArea(
       child: Scaffold(
+        resizeToAvoidBottomInset: false,
         bottomNavigationBar: buildBottomAppBar(iBottom, context),
         body: PageView(
           physics: const BouncingScrollPhysics(),
           onPageChanged: (index){
             Provider.of<BottomButtonModel>(context,listen: false).number = index;
-          },
+            },
           controller: _pageController,
           children: [
             const HomePage(),
@@ -174,7 +174,7 @@ class MyIconButton extends StatelessWidget {
       ),
       onPressed: () {
         Provider.of<BottomButtonModel>(context, listen: false).number = index;
-        _pageController.animateToPage(index, duration: const Duration(microseconds: 200), curve: Curves.bounceInOut);
+        _pageController.animateToPage(index, duration: const Duration(microseconds: 400), curve: Curves.bounceInOut);
       },
     );
   }

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../constants.dart';
 
+// ignore: must_be_immutable
 class VerticalPercentIndicator extends StatefulWidget {
   VerticalPercentIndicator({
     Key? key,
@@ -63,7 +64,7 @@ class _VerticalPercentIndicatorState extends State<VerticalPercentIndicator>with
             ],
           ),
         ),
-        if(widget.showLabel == true) SizedBox(height: 10),
+        if(widget.showLabel == true) const SizedBox(height: 10),
         if(widget.showLabel == true)Text(widget.label, style: const TextStyle(color: Colors.white)),
       ],
     );

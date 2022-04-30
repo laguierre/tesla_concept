@@ -22,11 +22,11 @@ class _HomePageState extends State<HomePage> {
 
   @override
   void initState() {
-    TimerStart();
+    timerStart();
     super.initState();
   }
 
-  void TimerStart() {
+  void timerStart() {
     Timer.periodic(const Duration(milliseconds: 500), (Timer timer) {
       int index = Provider.of<BottomButtonModel>(context, listen: false).number;
       if (index == 0) {
@@ -200,7 +200,8 @@ class InfoCard extends StatelessWidget {
       padding: const EdgeInsets.only(top: 15, bottom: 5, left: 15, right: 15),
       height: size.height * 0.16,
       width: size.height * 0.18,
-      decoration: BoxDecoration(boxShadow: [
+      decoration: BoxDecoration(gradient: kCardGradient,
+      boxShadow: [
         BoxShadow(
           color: kPrimaryColor.withOpacity(0.3),
           spreadRadius: 3,
